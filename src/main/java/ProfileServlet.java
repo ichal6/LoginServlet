@@ -14,18 +14,18 @@ public class ProfileServlet extends HttpServlet {
         request.getRequestDispatcher("link.html").include(request, response);
 
         Cookie[] cookies =request.getCookies();
-        boolean wasFoundCookie = false;
+        boolean wasLogIn = false;
         for(Cookie singleCookie: cookies){
             if(singleCookie.getName().equals("name")){
                 String name=singleCookie.getValue();
-                if(name!=null||!name.equals("")){
+                if(name!=null&&!name.equals("")){
                     out.print("<b>Welcome to Profile</b>");
                     out.print("<br>Welcome, "+name);
-                    wasFoundCookie = true;
+                    wasLogIn = true;
                 }
             }
         }
-        if(!wasFoundCookie){
+        if(!wasLogIn){
             out.print("Please login first");
             request.getRequestDispatcher("login.html").include(request, response);
         }
